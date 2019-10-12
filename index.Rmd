@@ -52,7 +52,7 @@ CCD.df = CCD.df %>%
 
 
 ## Quadratic regression    
-```{r, results = "hide", echo=T}
+```{r, results = "hide", warning=F, echo=T}
 # 1) clean up
 CCD.nested.df = CCD.df %>% nest(-compound) %>%
   mutate(model = map(data, ~lm(response ~ A + B + AB + AA + BB, data = .)), 
@@ -706,8 +706,10 @@ plt.Accuracy.blank.regression_ver1 = Accuracy.blank.df %>%
   geom_text(aes(x = -.6, y = 2.6, label = str_c("R2 = ", r.squared, "\np = ", p.value)), 
             size = 3, color = "black", fontface = 0, hjust = 0)
 plt.Accuracy.blank.regression_ver1
+```
 
 
+```{r, warning = F, fig.width=12, fig.height=6}
 # 4-2) Construct regression: version 2, overlapped
 plt.Accuracy.blank.regression_ver2 = Accuracy.blank.df %>% 
   left_join(cmpd.code, by = "compound") %>%
@@ -803,7 +805,10 @@ plt.Repeatability = Repeatability.df %>%
   geom_line(aes(x = cmpd.code, y = avg), linetype = "dashed", 
             color = "black", size = .4) # annotate average level
 plt.Repeatability
+```
 
+
+```{r, warning = F, fig.width=12, fig.height=6}
 # 2) Summary plot
 plt.Repeatability.hist =
   Repeatability.df %>% ggplot(aes(x = `Repeatability(%)`, fill = Level)) + 
