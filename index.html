@@ -2037,6 +2037,7 @@ CM.plasma %&gt;% ungroup() %&gt;% select(-c(compound, Tissue)) %&gt;%
                     heatmap_legend_param = list(
                       color_bar = &quot;continuous&quot;, legend_height = unit(8, &quot;cm&quot;), title = &quot;&quot;),
                     column_title = &quot;Plasma&quot;)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-53-1.png" width="960" /></p>
 <pre class="r"><code>CM.brain %&gt;% ungroup() %&gt;% select(-c(compound, Tissue)) %&gt;%
   cor() %&gt;% Heatmap(col = mycolor,
                     heatmap_legend_param = list(
@@ -2045,6 +2046,7 @@ CM.plasma %&gt;% ungroup() %&gt;% select(-c(compound, Tissue)) %&gt;%
                     # row_names_gp = gpar(fontsize = 6.5),
                     # column_names_gp = gpar(fontsize = 6.5),
                     column_title = &quot;Brain&quot;)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-54-1.png" width="960" /></p>
 </div>
 </div>
 
