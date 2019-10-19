@@ -385,7 +385,7 @@ annot.size = 2 # annotation size
 ln.width = .8 # regression line width</code></pre>
 <div id="esi-optimization" class="section level1">
 <h1><span class="header-section-number">1</span> ESI Optimization</h1>
-<pre class="r"><code>path = &quot;//Users/Boyuan/Desktop/My publication/6th. RK metabolites/Drafting files/validation all raw data (publish ready).xlsx&quot;
+<pre class="r"><code>path = &quot;/Users/Boyuan/Desktop/My publication/6th. RK metabolites/internal Review files/datasets.xlsx&quot;
 CCD.df = read_excel(path, sheet = &quot;ESI CCD&quot;)
 
 CCD.df = CCD.df %&gt;% 
@@ -437,7 +437,7 @@ plt.CCD.model.R2 = CCD.model.stats.df %&gt;%
 <pre class="r"><code># 6) Combine P-value and R2 plots
 plt.CCD.model = plot_grid(plt.CCD.model.p, plt.CCD.model.R2, align = &quot;h&quot;, rel_widths = c(1, .4))
 plt.CCD.model</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" width="1344" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" width="1344" /></p>
 </div>
 <div id="countour-plot" class="section level2">
 <h2><span class="header-section-number">1.2</span> Countour plot</h2>
@@ -491,7 +491,7 @@ plt.contour = contour.steps.df %&gt;%
   scale_x_continuous(labels = function(x) x * 50 + 200) +   
   scale_y_continuous(labels = function(x) x * 2 + 10)
 plt.contour # R2 &gt; 0.75</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" width="960" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" width="960" /></p>
 </div>
 <div id="model-checking" class="section level2">
 <h2><span class="header-section-number">1.3</span> Model checking</h2>
@@ -520,7 +520,7 @@ CCD.residual.df</code></pre>
   geom_smooth(method = &quot;lm&quot;, se = F, color = &quot;Firebrick&quot;) +
   labs(x = &quot;Fitted value (transformed into Z-score)&quot;, 
        y = &quot;Residual (transformed into Z-score&quot;)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" width="1152" /></p>
 <pre class="r"><code># Little correlation of residual vs. fitted value.</code></pre>
 </div>
 <div id="shapiro-wilks-normality-test" class="section level3">
@@ -542,7 +542,7 @@ CCD.shapiro.df %&gt;% ggplot(aes(x = compound, y = shapiro.p.value)) +
             hjust = 1.1, color = &quot;white&quot;, fontface = &quot;bold&quot;, size = 2.5, parse = T) +
   theme(axis.text = element_text(size = 8)) +
   labs(x = &quot;p value of Shapiro-Wilk normality test&quot;)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-28-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" width="1152" /></p>
 <pre class="r"><code># Modelling generally agreed well with normality assumption.</code></pre>
 <pre class="r"><code># 2-3) fitted VS. actual
 CCD.residual.df = CCD.residual.df %&gt;% left_join(CCD.model.stats.df, by = &quot;compound&quot;)
@@ -566,7 +566,7 @@ plt.CCD.fitted.vs.Actual = CCD.residual.df %&gt;%
   geom_text(aes(label = r.squared %&gt;% round(2)), 
             x = 1.3, y = -1.7, size = 2, color = &quot;black&quot;, alpha = 0.7)
 plt.CCD.fitted.vs.Actual</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-29-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" width="1152" /></p>
 </div>
 </div>
 </div>
@@ -711,7 +711,7 @@ plt.ANOVA.variance.partition = conc.ABCD.stats.df %&gt;%
                      strip.text = element_text(face = &quot;bold&quot;), strip.background = element_blank(),
                      panel.grid = element_blank())
 plt.ANOVA.variance.partition</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-34-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" width="1152" /></p>
 <pre class="r"><code># save a copy of this dataset for later re-plot of variance partition with rearranged order of compound
 conc.ABCD.stats.df.laterUse = conc.ABCD.stats.df 
 
@@ -721,12 +721,12 @@ conc.ABCD.stats.df %&gt;% ggplot(aes(x = conc.var.smpl.pct)) +
   geom_histogram(binwidth = 5) + facet_grid(Tissue ~ Level) +
   labs(x = &quot;sample-derived variability&quot;) + 
   scale_x_continuous(breaks = seq(0, 100, 20)) + theme_bw() # sample associated variance</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-35-1.png" width="960" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" width="960" /></p>
 <pre class="r"><code>conc.ABCD.stats.df %&gt;% ggplot(aes(x = conc.var.inj.pct)) + 
   geom_histogram(binwidth = 5) + facet_grid(Tissue ~ Level) +
   labs(x = &quot;injection-derived variability&quot;) + 
   scale_x_continuous(breaks = seq(0, 100, 20)) + theme_bw() # injection associated variance</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-35-2.png" width="960" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-16-2.png" width="960" /></p>
 <pre class="r"><code>#2-2) Contribution percent distribution; density plot
 p1 = conc.ABCD.stats.df %&gt;%
   ggplot(aes(x = conc.var.smpl.pct, fill = Level, color = Level)) + 
@@ -740,7 +740,7 @@ p2 = conc.ABCD.stats.df %&gt;%
   labs(x = &quot;injection-derived variability&quot;) + 
   scale_x_continuous(breaks = seq(0, 100, 10)) + theme_bw()  # injection associated variance
 grid.arrange(p1, p2, nrow = 2) # p1 and p2 only temporary objects, may overwritten later</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-35-3.png" width="960" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-16-3.png" width="960" /></p>
 </div>
 <div id="repeatability-preliminary" class="section level3">
 <h3><span class="header-section-number">2.2.2</span> Repeatability (preliminary)</h3>
@@ -758,7 +758,7 @@ Repeatability.df = conc.ABCD.stats.df %&gt;%
 # 2) Visualization (Will re-do later after calculation of accuracy, and re-arrange order of compounds by order of averaged accuracy)
 Repeatability.df %&gt;% ggplot(aes(x = compound, y = `Repeatability(%)`, color = Level))  + 
   geom_point() + facet_wrap(~Tissue) + coord_flip()</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-36-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-17-1.png" width="1152" /></p>
 <pre class="r"><code>### Combine average concentration with random factor statistics-based variance for Other purposes
 conc.stats.df = conc.ABCD.stats.df %&gt;%
   # Augment &quot;conc.stats.df&quot; with random statistics variance
@@ -778,7 +778,7 @@ conc.stats.df %&gt;% filter(Level %in% c(&quot;A&quot;, &quot;B&quot;, &quot;C&q
        y = &quot;Simple standard deviation of spiked conc.(ng/mL)&quot;) +
   scale_x_continuous(breaks = seq(0, 1200, 100)) + 
   scale_y_continuous(breaks = seq(0, 1200, 100)) + theme_bw()</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-38-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-19-1.png" width="1152" /></p>
 <pre class="r"><code># plot 2 Show difference percentage; bar plot
 conc.stats.df %&gt;% 
   # show difference percent: (random - simple)/simple (%)
@@ -786,7 +786,7 @@ conc.stats.df %&gt;%
   filter(Level %in% c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;)) %&gt;% # remove &quot;Enz&quot; and &quot;Blank&quot;, as above
   ggplot(aes(x = compound, y = var.diff.rand.VS.simple)) + geom_bar(stat = &quot;identity&quot;) + 
   coord_flip() + facet_grid(Tissue ~ Level)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-39-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" width="1152" /></p>
 <pre class="r"><code># plot 3 Show difference distribution; histogram
 conc.stats.df %&gt;% 
   # show difference percent: (random - simple)/simple (%)
@@ -797,7 +797,7 @@ conc.stats.df %&gt;%
   labs(x = &quot;Percent point difference of random effects-derived std higher than simple std&quot;) + 
   theme_bw() + facet_wrap(~Tissue) +
   theme(panel.grid = element_blank(), strip.background = element_blank())</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-40-1.png" width="960" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" width="960" /></p>
 <pre class="r"><code># plot 4 Show observations (rows) with large difference (&gt; 10 %)
 conc.stats.df %&gt;% 
   mutate(var.diff.rand.VS.simple = (conc.std.total - conc.std.simple)/conc.std.simple * 100) %&gt;%
@@ -878,7 +878,7 @@ plt.Accuracy = Accuracy.df %&gt;%
   theme(strip.text = element_text(face = &quot;bold&quot;), strip.background = element_blank(), 
         panel.grid = element_blank(), axis.title = element_text(face = &quot;bold&quot;)) + labs(y = &quot;Accuracy (%)&quot;)
 plt.Accuracy</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-41-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" width="1152" /></p>
 </div>
 <div id="inference-across-linear-range" class="section level3">
 <h3><span class="header-section-number">2.2.5</span> Inference across linear range</h3>
@@ -953,7 +953,7 @@ plt.LDR1 = Accuracy.LDR.df %&gt;% ggplot(aes(x = compound, y = Accuracy.LDR)) +
   geom_text(aes(label = removeD, x = compound), y = 5, color = &quot;steelblue&quot;, vjust = .8) + 
   annotate(geom = &quot;rect&quot;, xmin = 1, xmax = 26, ymin = 80, ymax = 120, fill = &quot;black&quot;, alpha = .08)
 plt.LDR1 # removed rows has no stars; those removed rows have A-B-C-D four levels included in referrence</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <pre class="r"><code># 7-2)
 plt.LDR2 = Accuracy.LDR.df %&gt;% select(Tissue, compound, MSE, var.level) %&gt;% 
   gather(c(MSE, var.level), key = source, value = value) %&gt;%
@@ -963,7 +963,7 @@ plt.LDR2 = Accuracy.LDR.df %&gt;% select(Tissue, compound, MSE, var.level) %&gt;
   theme(axis.text = element_text(color = &quot;black&quot;), panel.grid = element_blank()) +
   scale_fill_brewer(palette = &quot;Set1&quot;)
 plt.LDR2</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-42-2.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
 <pre class="r"><code># plot_grid(plt.LDR1, plt.LDR2, nrow = 1, align = &quot;h&quot;, rel_widths = c(1, 0.8))</code></pre>
 </div>
 <div id="background-interference" class="section level3">
@@ -990,7 +990,7 @@ plt.blank.Enz = blank.Enz.df %&gt;%
   theme(strip.text = element_text(face = &quot;bold&quot;), strip.background = element_blank(), 
         panel.grid = element_blank(), axis.text = element_text(color = &quot;black&quot;))
 plt.blank.Enz</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-43-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" width="1152" /></p>
 <pre class="r"><code>blank.Enz.df %&gt;% filter(Tissue == &quot;Br&quot;, compound %in% c(&quot;HVA&quot;, &quot;3,4-DHPAA&quot;)) # manual check</code></pre>
 <pre><code>## # A tibble: 4 x 5
 ## # Groups:   Tissue, Level [2]
@@ -1003,7 +1003,7 @@ plt.blank.Enz</code></pre>
 <pre class="r"><code># 3) Compare accuracy vs. endogenous level
 ggdraw() + draw_plot(plt.Accuracy, x = 0, y = 0, width = 0.6) + 
   draw_plot(plt.blank.Enz, x = 0.6, width = 0.4)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-43-2.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-24-2.png" width="1152" /></p>
 <pre class="r"><code># 4) Correlate accuracy variance with blank level
 Accuracy.blank.df = Accuracy.df  %&gt;% 
   # remove zero blanks before log10 transformation
@@ -1035,7 +1035,7 @@ plt.Accuracy.blank.regression_ver1 = Accuracy.blank.df %&gt;%
   geom_text(aes(x = -.6, y = 2.6, label = str_c(&quot;R2 = &quot;, r.squared, &quot;\np = &quot;, p.value)), 
             size = 3, color = &quot;black&quot;, fontface = 0, hjust = 0)
 plt.Accuracy.blank.regression_ver1</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-43-3.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-24-3.png" width="1152" /></p>
 <pre class="r"><code># 4-2) Construct regression: version 2, overlapped
 plt.Accuracy.blank.regression_ver2 = Accuracy.blank.df %&gt;% 
   left_join(cmpd.code, by = &quot;compound&quot;) %&gt;%
@@ -1060,7 +1060,7 @@ plt.Accuracy.blank.regression_ver2 = Accuracy.blank.df %&gt;%
   geom_text(aes(x = 1, y = 150, label =  p.value), size = 2,
             fontface = 0, hjust = 0, position = position_dodge(2))
 plt.Accuracy.blank.regression_ver2</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-44-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" width="1152" /></p>
 </div>
 <div id="random-effects-anova-revised" class="section level3">
 <h3><span class="header-section-number">2.2.7</span> Random effects ANOVA (revised)</h3>
@@ -1091,7 +1091,7 @@ plt.ANOVA.variance.partition =
   theme(axis.text = element_text(color = &quot;black&quot;, size = 7.1), panel.grid  = element_blank()) +
   scale_fill_manual(values = c(&quot;#212624&quot;, &quot;tomato&quot;, &quot;#54678F&quot;)) # black - red - blue
 plt.ANOVA.variance.partition</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-45-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-26-1.png" width="1152" /></p>
 <pre class="r"><code># 2-2) visualization - dodged position
 plt.ANOVA.variance.partition.dodge =  variance.partition.all.df %&gt;%
   # filter(Level == &quot;D&quot;) %&gt;%
@@ -1104,7 +1104,7 @@ plt.ANOVA.variance.partition.dodge =  variance.partition.all.df %&gt;%
         panel.grid  = element_blank(), strip.background = element_blank()) +
   scale_fill_manual(values = c(&quot;#212624&quot;, &quot;tomato&quot;, &quot;#54678F&quot;)) # black - red - blue
 plt.ANOVA.variance.partition.dodge</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-45-2.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-26-2.png" width="1152" /></p>
 </div>
 <div id="repeatability-revised-1" class="section level3">
 <h3><span class="header-section-number">2.2.8</span> Repeatability ( revised 1)</h3>
@@ -1129,7 +1129,7 @@ plt.Repeatability = Repeatability.df %&gt;%
   geom_line(aes(x = cmpd.code, y = avg), linetype = &quot;dashed&quot;, 
             color = &quot;black&quot;, size = .4) # annotate average level
 plt.Repeatability</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-46-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" width="1152" /></p>
 <pre class="r"><code># 2) Summary plot
 plt.Repeatability.hist =
   Repeatability.df %&gt;% ggplot(aes(x = `Repeatability(%)`, fill = Level)) + 
@@ -1140,7 +1140,7 @@ plt.Repeatability.hist =
         strip.background = element_blank(), panel.grid = element_blank()) +
   scale_fill_brewer(palette = &quot;Set2&quot;)
 plt.Repeatability.hist</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-47-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-28-1.png" width="1152" /></p>
 </div>
 </div>
 <div id="matrix-effects-recovery-and-processing-efficiency" class="section level2">
@@ -1249,7 +1249,7 @@ plt.matrix = matrix.tidy.df %&gt;% ungroup() %&gt;%
         panel.grid = element_blank(),
         axis.text = element_text(color = &quot;black&quot;), axis.title = element_text(face = &quot;bold&quot;))
 plt.matrix # M, matrix effect; P, processing; R, recovery</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-48-1.png" width="1056" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-29-1.png" width="1056" /></p>
 <pre class="r"><code># 4-2) log10 scale as miniature inset
 plt.matrix.miniature = matrix.tidy.df %&gt;% 
   mutate(mean.log = log10(mean), std.log = log10(std)) %&gt;%
@@ -1265,7 +1265,7 @@ plt.matrix.miniature = matrix.tidy.df %&gt;%
                      axis.text = element_text(color = &quot;black&quot;)) +
   labs(title = &quot;logscale&quot;)
 plt.matrix.miniature</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-48-2.png" width="1056" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-29-2.png" width="1056" /></p>
 <pre class="r"><code># 5) density plot of recovery vs. matrix effects
 plt.density.matrix.recovery = matrix.df %&gt;% 
   mutate(notes = str_c(compound, &quot;_&quot;, Level)) %&gt;%
@@ -1281,7 +1281,7 @@ plt.density.matrix.recovery = matrix.df %&gt;%
   geom_point(color = &quot;white&quot;, alpha = .3, size = .6, shape = 16)
 # geom_text(color = &quot;white&quot;, size = 1, alpha = .5, aes(label = notes))
 plt.density.matrix.recovery</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-49-1.png" width="960" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-30-1.png" width="960" /></p>
 </div>
 <div id="matrix-effect-vs.accuracy" class="section level3">
 <h3><span class="header-section-number">2.3.2</span> Matrix effect vs. accuracy</h3>
@@ -1315,7 +1315,7 @@ Acc.Mat.tidy.df %&gt;%
   theme_bw() +
   theme(strip.text = element_text(face = &quot;bold&quot;), strip.background = element_blank(), 
         panel.grid = element_blank(), axis.text = element_text(color = &quot;black&quot;))</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-50-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-31-1.png" width="1152" /></p>
 <pre class="r"><code># 3) Manually calculate coorelation for double check &amp; annotation with designted location
 plt.Acc.mat = Acc.Mat.tidy.df %&gt;% ungroup() %&gt;% nest(-c(Tissue, effect)) %&gt;%
   mutate(model = map(data, ~ lm(log10(accuracy.LevelMean) ~ log10(effect.percent), data = .)), 
@@ -1353,7 +1353,7 @@ plt.Acc.mat = Acc.Mat.tidy.df %&gt;% ungroup() %&gt;% nest(-c(Tissue, effect)) %
         axis.title = element_text(face = &quot;bold&quot;)) +
   scale_color_manual(values = c(&quot;Firebrick&quot;, &quot;Steelblue&quot;, &quot;Black&quot;))
 plt.Acc.mat</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-50-2.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-31-2.png" width="1152" /></p>
 <pre class="r"><code># 4) plot regression analysis together
 # plot_grid(plt.Accuracy.blank.regression_ver2, plt.Acc.mat, align = &quot;v&quot;, nrow = 2) # ~ 1:1 display ratio
 
@@ -1385,21 +1385,21 @@ plt.Repeatability = Repeatability.df %&gt;%
   # annotate average level
   geom_line(aes(x = cmpd.code, y = avg), linetype = &quot;dashed&quot;, color = &quot;black&quot;, size = .4) 
 plt.Repeatability</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-51-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-32-1.png" width="1152" /></p>
 <pre class="r"><code># 2) Summary plot
 Repeatability.df %&gt;% ggplot(aes(x = `Repeatability(%)`, color = Level, fill = Level)) + 
   geom_histogram(binwidth = 1) + facet_wrap(~Tissue, nrow = 1) +
   theme(axis.text = element_text(color =&quot;black&quot;)) + 
   theme(strip.text = element_text(face = &quot;bold&quot;), 
         strip.background = element_blank(), panel.grid = element_blank())</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-52-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-33-1.png" width="1152" /></p>
 </div>
 <div id="accuracy-repeatabiltiy-plot-matrix-effects" class="section level3">
 <h3><span class="header-section-number">2.3.4</span> Accuracy &amp; repeatabiltiy plot &amp; matrix effects</h3>
 <pre class="r"><code># 1) standard plot
 # the two missing values come from repeatability (removed high repeatability, Check!)
 grid.arrange(plt.Accuracy, plt.Repeatability, plt.matrix, nrow = 1)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-53-1.png" width="1344" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-34-1.png" width="1344" /></p>
 <pre class="r"><code># 2) density plot of averaged accuracy vs. precision
 plt.density.accuracy.vs.repeatability = Repeatability.df %&gt;% ungroup() %&gt;% 
   select(Tissue, Level, compound, `Repeatability(%)`) %&gt;%
@@ -1417,7 +1417,7 @@ plt.density.accuracy.vs.repeatability = Repeatability.df %&gt;% ungroup() %&gt;%
   scale_x_log10() + scale_y_log10() + annotation_logticks() + theme_minimal() +
   theme(axis.text = element_text(color = &quot;black&quot;), panel.spacing = unit(.5, &quot;cm&quot;))
 plt.density.accuracy.vs.repeatability</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-54-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-35-1.png" width="1152" /></p>
 </div>
 <div id="is-correction-vs.accuracy-vs.processing-efficiency" class="section level3">
 <h3><span class="header-section-number">2.3.5</span> IS correction vs. accuracy vs. processing efficiency</h3>
@@ -1446,7 +1446,7 @@ plt.Acc.Proces = Acc.Process.df %&gt;%
   labs(y = &quot;Deviation of accuracy and processing efficiency from one hundred percentage level&quot;,
        x = &quot;Metabolites&quot;)
 plt.Acc.Proces</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-55-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-36-1.png" width="1152" /></p>
 <pre class="r"><code># 3) Regression analysis: IS correction VS Accuracy
 Acc.IScorrection.df = Acc.Process.df %&gt;% 
   spread(key = source, value = diff) %&gt;% 
@@ -1487,7 +1487,7 @@ plt.Acc.IScorrection =  Acc.IScorrection.df %&gt;%
                      strip.background = element_blank(), 
                      panel.grid = element_blank())
 plt.Acc.IScorrection # accuracy being the average of ABC level</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-56-1.png" width="960" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-37-1.png" width="960" /></p>
 <pre class="r"><code># 4-2) Plasma
 plt.Acc.IScorrection.plasma =  Acc.IScorrection.df %&gt;% filter(Tissue == &quot;Pl&quot;) %&gt;%
   
@@ -1505,7 +1505,7 @@ plt.Acc.IScorrection.plasma =  Acc.IScorrection.df %&gt;% filter(Tissue == &quot
        y = &quot;Log10(Accuracy deviation from one hundred percentage level)&quot;,
        title = &quot;Plasma&quot;)
 plt.Acc.IScorrection.plasma</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <pre class="r"><code># 4-3) Brain
 plt.Acc.IScorrection.brain =  Acc.IScorrection.df %&gt;% filter(Tissue == &quot;Br&quot;) %&gt;%
   
@@ -1524,13 +1524,13 @@ plt.Acc.IScorrection.brain =  Acc.IScorrection.df %&gt;% filter(Tissue == &quot;
        y = &quot;Accuracy deviation from \none hundred percentage level&quot;,
        title = &quot;Brain&quot;)
 plt.Acc.IScorrection.brain</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <pre class="r"><code># 5) IS most associated with recovery?
 Acc.IScorrection.df %&gt;% select(Tissue, compound, IS.correction, cmpd.code) %&gt;% 
   left_join(Acc.Mat.tidy.df, by = c(&quot;Tissue&quot;, &quot;compound&quot;)) %&gt;%
   ggplot(aes(x = IS.correction, y = effect.percent, color = effect)) + 
   geom_point() + facet_grid(effect~Tissue, scales = &quot;free&quot;) + scale_x_log10() + scale_y_log10()</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-59-1.png" width="768" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-40-1.png" width="768" /></p>
 </div>
 </div>
 <div id="compound-instability" class="section level2">
@@ -1557,7 +1557,7 @@ degrad.df %&gt;%
   ggplot(aes(x = time.elapse.h, y = `remaining(%)`, color = Day, shape = Level)) +
   geom_point()  + facet_wrap(~compound, nrow = 5) +
   scale_color_brewer(palette = &quot;Set1&quot;)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-60-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-41-1.png" width="1152" /></p>
 <pre class="r"><code># 3) Remove abberant single data point
 # Identify &quot;Day4_B_r1.d&quot; as the apparently abberant single data point
 degrad.df %&gt;% filter(compound == &quot;RK&quot;, `remaining(%)` &lt; 10) 
@@ -1570,7 +1570,7 @@ degrad.df %&gt;%
   theme_bw() + 
   theme(axis.text = element_text(color = &quot;black&quot;), strip.text = element_text(face = &quot;bold&quot;), 
         strip.background = element_blank(), panel.grid = element_blank())</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-61-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-42-1.png" width="1152" /></p>
 <pre class="r"><code>degrad.model.df = degrad.df %&gt;% 
   select(compound, time.elapse.h, `remaining(%)`) %&gt;% 
   ungroup() %&gt;% nest(-compound) %&gt;%
@@ -1634,7 +1634,7 @@ plt.degrade.all = degrad.df %&gt;%
             x = .1, y = 15, color = &quot;black&quot;, size = annot.size, hjust = 0, fontface = &quot;bold&quot;) +
   labs(x = &quot;Time (h)&quot;, y = &quot;Concentration remaining fraction (%)&quot;)
 plt.degrade.all</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-62-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-43-1.png" width="1152" /></p>
 <pre class="r"><code># 6-2) Most unstable compounds
 regress.summary.df2 = degrad.df %&gt;% 
   filter(time.elapse.h == 0, Day == &quot;Day1&quot;, Level ==&quot;A&quot;, estimate.slope &lt; -10) # MANUAL INPUT NEEDED!!
@@ -1668,7 +1668,7 @@ plt.degrade.severe = degrad.df %&gt;%
   labs(x = &quot;Time (h)&quot;, 
        y = &quot;Concentration remaining fraction (%)&quot;)
 plt.degrade.severe</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 <div id="degradation-vs.-recovery-matrix-effects-processing-efficiency" class="section level3">
 <h3><span class="header-section-number">2.4.1</span> Degradation vs. (recovery &amp; matrix effects &amp; processing efficiency)</h3>
 <p>Plot degradation slope coorelation with varaince associated with processing efficiency (later with DOE modelling)</p>
@@ -1703,17 +1703,17 @@ plt.degrad.matrix.regress = degrad.matrix.regress.df %&gt;%
   geom_text(aes(label = paste0(&quot;p  =&quot;, scientific(p.value,4))), 
             x = -5, y = 1.8, size = annot.size - .5, color = &quot;black&quot;)
 plt.degrad.matrix.regress</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-64-1.png" width="864" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-45-1.png" width="864" /></p>
 <pre class="r"><code># 3) Combine degradation with matrix validation variation
 plot_grid(plt.degrade.severe, plt.degrad.matrix.regress, nrow = 1, rel_widths = c(2.5, 2))</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-65-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-46-1.png" width="1152" /></p>
 <pre class="r"><code># 4) Combine degradation with matrix validation mean level
 degrad.matrix.regress.df %&gt;% left_join(cmpd.code, by = &quot;compound&quot;) %&gt;%
   ggplot(aes(x = estimate.slope, y = log10(mean), color = Level)) + 
   geom_text(aes(label = compound)) +
   facet_wrap(~Tissue) +  annotation_logticks(sides = &quot;l&quot;) +
   geom_smooth(method = &quot;lm&quot;, se = F)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-65-2.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-46-2.png" width="1152" /></p>
 </div>
 <div id="compound-degradation-vs.accuracy" class="section level3">
 <h3><span class="header-section-number">2.4.2</span> Compound degradation vs. accuracy</h3>
@@ -1737,7 +1737,7 @@ Acc.degrad.df %&gt;% ggplot(aes(x = estimate.slope, y = `Accuracy.mean(%)`)) +
             aes(label = paste(&quot;p ==&quot;, p.value %&gt;% scientific(3) ), x = -10, y = 190 ), parse = T) +
   theme_bw() + theme(axis.text = element_text(color = &quot;black&quot;), 
                      strip.background = element_blank(), panel.grid = element_blank())</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-66-1.png" width="960" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-47-1.png" width="960" /></p>
 </div>
 <div id="degradation-vs.ccd-model" class="section level3">
 <h3><span class="header-section-number">2.4.3</span> Degradation vs. CCD model</h3>
@@ -1768,7 +1768,7 @@ plt.degrad.CCD = degrad.CCD.df %&gt;%
   theme(axis.text = element_text(color = &quot;black&quot;, size = 8.5), panel.grid = element_blank(),
         axis.title = element_text(size = 8.5), legend.position = &quot;None&quot;)
 plt.degrad.CCD</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-67-1.png" width="768" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-48-1.png" width="768" /></p>
 </div>
 <div id="effects-of-neat-solvent-vs.biomatrix" class="section level3">
 <h3><span class="header-section-number">2.4.4</span> Effects of neat solvent vs. biomatrix</h3>
@@ -1801,7 +1801,7 @@ plt.plasma.degrad = area.df %&gt;% filter(time.elapse != 0, Tissue == &quot;Pl&q
        title = &quot;Plasma&quot;)
 
 plt.plasma.degrad</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-68-1.png" width="960" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-49-1.png" width="960" /></p>
 <pre class="r"><code># 2-2) brain
 plt.brain.degrad = area.df %&gt;% filter(time.elapse != 0, Tissue == &quot;Br&quot;) %&gt;%
   ggplot(aes(x = time.elapse, y = error, color = Level, shape = Tissue)) +
@@ -1813,7 +1813,7 @@ plt.brain.degrad = area.df %&gt;% filter(time.elapse != 0, Tissue == &quot;Br&qu
        title = &quot;Brain&quot;)
 
 plt.brain.degrad</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-68-2.png" width="960" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-49-2.png" width="960" /></p>
 <pre class="r"><code># 2-4) all data combined
 plt.2ndInjection.vs.1stinjection.biomatrices = area.df %&gt;% filter(time.elapse != 0) %&gt;%
   mutate(compound = factor(compound, levels = rev(cmpd.ordered), ordered = T)) %&gt;%
@@ -1833,7 +1833,7 @@ plt.2ndInjection.vs.1stinjection.biomatrices = area.df %&gt;% filter(time.elapse
   geom_rug(alpha = .6)
 
 plt.2ndInjection.vs.1stinjection.biomatrices</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-69-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-50-1.png" width="1152" /></p>
 <pre class="r"><code># note that the time difference of 2nd vs. 1st injection is for plasma 10.4~10.8 hours, for braom 8.6 ~ 9 hours
 # removed 17 outliers
 
@@ -1849,7 +1849,7 @@ area.df %&gt;% filter(time.elapse != 0) %&gt;%
   labs(y = &quot;2nd injection error percent relative to 1st injection of the same sample, spaced by ~10 hours&quot;) +
   scale_x_continuous(limits = c(-20, 20))</code></pre>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-69-2.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-50-2.png" width="1152" /></p>
 </div>
 <div id="degradation-test" class="section level3">
 <h3><span class="header-section-number">2.4.5</span> Degradation test</h3>
@@ -1886,7 +1886,7 @@ degrad.prelim %&gt;%
   geom_smooth(method = &quot;lm&quot;, se = F, size = .8) +
   scale_y_continuous(breaks = seq(0, 100, 25)) +
   scale_x_continuous(breaks = seq(0, 10, 2))</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-70-1.png" width="1152" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-51-1.png" width="1152" /></p>
 </div>
 </div>
 <div id="method-merits-correlation-matrix" class="section level2">
@@ -2037,7 +2037,6 @@ CM.plasma %&gt;% ungroup() %&gt;% select(-c(compound, Tissue)) %&gt;%
                     heatmap_legend_param = list(
                       color_bar = &quot;continuous&quot;, legend_height = unit(8, &quot;cm&quot;), title = &quot;&quot;),
                     column_title = &quot;Plasma&quot;)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-72-1.png" width="960" /></p>
 <pre class="r"><code>CM.brain %&gt;% ungroup() %&gt;% select(-c(compound, Tissue)) %&gt;%
   cor() %&gt;% Heatmap(col = mycolor,
                     heatmap_legend_param = list(
@@ -2046,7 +2045,6 @@ CM.plasma %&gt;% ungroup() %&gt;% select(-c(compound, Tissue)) %&gt;%
                     # row_names_gp = gpar(fontsize = 6.5),
                     # column_names_gp = gpar(fontsize = 6.5),
                     column_title = &quot;Brain&quot;)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-73-1.png" width="960" /></p>
 </div>
 </div>
 

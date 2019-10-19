@@ -40,7 +40,7 @@ ln.width = .8 # regression line width
 # ESI Optimization 
 
 ```{r, warning = F, fig.width=12, fig.height=8}
-path = "//Users/Boyuan/Desktop/My publication/6th. RK metabolites/Drafting files/validation all raw data (publish ready).xlsx"
+path = "/Users/Boyuan/Desktop/My publication/6th. RK metabolites/internal Review files/datasets.xlsx"
 CCD.df = read_excel(path, sheet = "ESI CCD")
 
 CCD.df = CCD.df %>% 
